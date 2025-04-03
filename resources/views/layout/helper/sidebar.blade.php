@@ -30,8 +30,8 @@
                 </a>
             </li>
 
-            <li class="menu {{ request()->routeIs('category.*') ? 'active' : '' }}">
-                <a href="#category" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('category.*') ? 'true' : 'false' }}" class="dropdown-toggle">
+            <li class="menu {{ request()->routeIs('campaign.*') ? 'active' : '' }}">
+                <a href="#campaign" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('campaign.*') ? 'true' : 'false' }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                         <span>Categoría</span>
@@ -40,83 +40,14 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ request()->routeIs('category.*') ? 'show' : '' }}" id="category" data-bs-parent="#accordionExample">
-                    <li class="{{ request()->routeIs('category.index') ? 'active' : '' }}">
-                        <a href="{{ route( 'category.list' ) }}">Lista</a>
+                <ul class="collapse submenu list-unstyled {{ request()->routeIs('campaign.*') ? 'show' : '' }}" id="campaign" data-bs-parent="#accordionExample">
+                    <li class="{{ request()->routeIs('campaign.index') ? 'active' : '' }}">
+                        <a href="{{ route( 'campaign.list' ) }}">Lista</a>
                     </li>
-                    <li class="{{ request()->routeIs('category.create') ? 'active' : '' }}">
-                        <a href="{{ route( 'category.create' ) }}">Agregar</a>
+                    <li class="{{ request()->routeIs('campaign.create') ? 'active' : '' }}">
+                        <a href="{{ route( 'campaign.create' ) }}">Agregar</a>
                     </li>                          
                 </ul>
-            </li>
-
-            <li class="menu {{ request()->routeIs('products.*') ? 'active' : '' }}">
-                <a href="#product" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('products.*') ? 'true' : 'false' }}" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        <span>Producto</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled {{ request()->routeIs('products.*') ? 'show' : '' }}" id="product" data-bs-parent="#accordionExample">
-                    <li class="{{ request()->routeIs('products.index') ? 'active' : '' }}">
-                        <a href="{{ route( 'products.list' ) }}">Lista</a>
-                    </li>
-                    <li class="{{ request()->routeIs('products.create') ? 'active' : '' }}">
-                        <a href="{{ route( 'products.create' ) }}">Agregar</a>
-                    </li>                          
-                </ul>
-            </li>
-
-            <li class="menu {{ request()->routeIs('coupon.*') ? 'active' : '' }}">
-                <a href="#cupon" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('coupon.*') ? 'true' : 'false' }}" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        <span>Cupones</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled {{ request()->routeIs('coupon.*') ? 'show' : '' }}" id="cupon" data-bs-parent="#accordionExample">
-                    <li class="{{ request()->routeIs('coupon.index') ? 'active' : '' }}">
-                        <a href="{{ route( 'coupon.list' ) }}">Lista</a>
-                    </li>
-                    <li class="{{ request()->routeIs('coupon.create') ? 'active' : '' }}">
-                        <a href="{{ route( 'coupon.create' ) }}">Agregar</a>
-                    </li>                          
-                </ul>
-            </li>
-
-            <li class="menu {{ request()->routeIs('order.*') ? 'active' : '' }}">
-                <a href="#order" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('order.*') ? 'true' : 'false' }}" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        <span>Pedidos</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled {{ request()->routeIs('order.*') ? 'show' : '' }}" id="order" data-bs-parent="#accordionExample">
-                    <li class="{{ request()->routeIs('order.index') ? 'active' : '' }}">
-                        <a href="{{ route( 'order.list' ) }}">Lista</a>
-                    </li>
-                    <li class="{{ request()->routeIs('coupon.create') ? 'active' : '' }}">
-                        <a href="{{ route( 'order.create' ) }}">Agregar</a>
-                    </li>                          
-                </ul>
-            </li>
-
-            <li class="menu {{ request()->routeIs('sale.*') ? 'active' : '' }}">
-                <a href="{{ route( 'sale.list' ) }}" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <span>Ventas</span>
-                    </div>
-                </a>
             </li>
 
             <li class="menu {{ request()->routeIs('user.*') ? 'active' : '' }}">

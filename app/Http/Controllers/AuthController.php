@@ -62,10 +62,9 @@ class AuthController extends Controller
                     env( "APP_CODE" ) . '3m41l' => $user->email,
                     env( "APP_CODE" ) . '1d' => Crypt::encryptString( $user->id ),
                     env( "APP_CODE" ) . 'n4m3' => $user->name,
-                    env( "APP_CODE" ) . 'r013' => Crypt::encryptString( $user->role_id ),
-                    env( "APP_CODE" ) . '4va4taR' => $user->avatar
+                    env( "APP_CODE" ) . 'r013' => Crypt::encryptString( $user->role_id )
                 ]);
-                return redirect()->route( 'home' );
+                return redirect()->route( 'campaign.list' );
             } catch (\Throwable $th) {
 
                 return redirect()->route('login')

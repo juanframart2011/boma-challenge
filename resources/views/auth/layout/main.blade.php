@@ -60,7 +60,7 @@
     
                         <div class="position-relative">
     
-                            <img src="{{ asset( 'assets/img/auth-cover.svg' ) }}" alt="auth-img">
+                            <img src="{{ asset( 'img/boma-logo.png' ) }}" alt="{{ config( 'app.name' ) }}">
     
                             <h2 class="mt-5 text-white font-weight-bolder px-2">{{ config( 'app.name' ) }}</h2>
                             <p class="text-white px-2">Administrador</p>
