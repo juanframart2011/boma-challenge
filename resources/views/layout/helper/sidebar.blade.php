@@ -5,7 +5,7 @@
             <div class="nav-logo">
                 <div class="nav-item theme-logo">
                     <a href="./index.html">
-                        <img src="{{ asset( 'chucumites.png' ) }}" class="navbar-logo" alt="{{ config( 'app.name' ) }}">
+                        <img src="{{ asset( 'img/boma-logo.png' ) }}" class="navbar-logo" alt="{{ config( 'app.name' ) }}">
                     </a>
                 </div>
                 <div class="nav-item theme-text">
@@ -34,7 +34,7 @@
                 <a href="#campaign" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('campaign.*') ? 'true' : 'false' }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        <span>Categoría</span>
+                        <span>Campañas</span>
                     </div>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -50,25 +50,27 @@
                 </ul>
             </li>
 
-            <li class="menu {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                <a href="#user" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('user.*') ? 'true' : 'false' }}" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        <span>Usuario</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled {{ request()->routeIs('user.*') ? 'show' : '' }}" id="user" data-bs-parent="#accordionExample">
-                    <li class="{{ request()->routeIs('user.index') ? 'active' : '' }}">
-                        <a href="{{ route( 'user.list' ) }}">Lista</a>
-                    </li>
-                    <li class="{{ request()->routeIs('user.create') ? 'active' : '' }}">
-                        <a href="{{ route( 'user.create' ) }}">Agregar</a>
-                    </li>                          
-                </ul>
-            </li>
+            @if( Crypt::decryptString( session( env( "APP_CODE" ) . 'r013' ) ) != 3 )
+                <li class="menu {{ request()->routeIs('user.*') ? 'active' : '' }}">
+                    <a href="#user" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('user.*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            <span>Usuario</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled {{ request()->routeIs('user.*') ? 'show' : '' }}" id="user" data-bs-parent="#accordionExample">
+                        <li class="{{ request()->routeIs('user.index') ? 'active' : '' }}">
+                            <a href="{{ route( 'user.list' ) }}">Lista</a>
+                        </li>
+                        <li class="{{ request()->routeIs('user.create') ? 'active' : '' }}">
+                            <a href="{{ route( 'user.create' ) }}">Agregar</a>
+                        </li>                          
+                    </ul>
+                </li>
+            @endif
         </ul>                
     </nav>
 </div>
