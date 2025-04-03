@@ -40,15 +40,12 @@ Route::group(['prefix' => 'admin'], function(){
     #Usuarios
     Route::prefix('user')->name('user.')->group(function(){
 
-        Route::get( 'profile', [ UserController::class, 'profile' ] )->name('profile');
-
         Route::get( 'list', [ UserController::class, 'index' ] )->name('list');
 
         Route::get( 'create', [ UserController::class, 'create' ] )->name('create');
         Route::post( 'save', [ UserController::class, 'save' ] )->name('save');
         
         Route::get( 'edit/{id}', [ UserController::class, 'edit' ] )->name('edit');
-        Route::get( 'detail/{id}', [ UserController::class, 'detail' ] )->name('detail');
         Route::put( 'update/{id}', [ UserController::class, 'update' ] )->name('update');
 
         Route::post( 'delete', [ UserController::class, 'delete' ] )->name('delete');

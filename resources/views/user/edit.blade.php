@@ -4,13 +4,6 @@
 
 @push('styles')
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <link rel="stylesheet" href="{{ asset( 'plugins/src/filepond/filepond.min.css' ) }}">
-    <link rel="stylesheet" href="{{ asset( 'plugins/src/filepond/FilePondPluginImagePreview.min.css' ) }}">
-    <link href="{{ asset( 'plugins/css/light/filepond/custom-filepond.css' ) }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset( 'plugins/css/dark/filepond/custom-filepond.css' ) }}" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-
     <link rel="stylesheet" href="{{ asset( 'plugins/src/sweetalerts2/sweetalerts2.css' ) }}">
 @endpush
 
@@ -55,29 +48,8 @@
 @endsection
 
 @push('scripts')
-    
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="{{ asset( 'plugins/src/filepond/filepond.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/FilePondPluginFileValidateType.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/FilePondPluginImageExifOrientation.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/FilePondPluginImagePreview.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/FilePondPluginImageCrop.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/FilePondPluginImageResize.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/FilePondPluginImageTransform.min.js' ) }}"></script>
-    <script src="{{ asset( 'plugins/src/filepond/filepondPluginFileValidateSize.min.js' ) }}"></script>
-
     <script src="{{ asset( 'plugins/src/sweetalerts2/sweetalerts2.min.js' ) }}"></script>
-
-    <script type="text/javascript">
-        // **Guardar la URL de la imagen actual**
-        let existingImageUrl = "{{ asset($user->avatar) }}";
-    </script>
-
     <script src="{{ asset( 'js/user.js' ) }}"></script>
-    <script type="text/javascript">
-        
-        imageField.addFile( existingImageUrl );
-    </script>
 
     <!-- END PAGE LEVEL SCRIPTS -->
 @endpush

@@ -1,15 +1,3 @@
-FilePond.registerPlugin(
-    FilePondPluginImagePreview,
-    FilePondPluginImageExifOrientation,
-    FilePondPluginFileValidateSize,
-    // FilePondPluginImageEdit
-);
-
-const imageField = FilePond.create(document.getElementById('avatar'), {
-    allowMultiple: false,
-    maxFileSize: '3MB'
-});
-
 // Validación y envío del formulario
 $('#user-form').submit(function (e) {
 
@@ -27,10 +15,6 @@ function validateForm() {
     if (name === '') errors.push("El nombre del usuario es obligatorio.");
     if (email === '') errors.push("El email es obligatorio.");
     if (role_id === '') errors.push("El rol es obligatorio.");
-
-    if (!imageField.getFiles().length) {
-        errors.push("El avatar es obligatorio.");
-    }
 
     if( $('#user-form').attr( "method" ) == 'post' ){
 
@@ -67,10 +51,6 @@ function submitUserForm() {
     formData.append('role_id', $('#role_id').val());
 
     if( $('#user-form').attr( "method" ) == 'post' ){
-
-        if (imageField.getFiles().length > 0) {
-            formData.append('avatar', imageField.getFile().file);
-        }
 
         formData.append('password', $('#password').val() );
         formData.append('repassword', $('#repassword').val() );

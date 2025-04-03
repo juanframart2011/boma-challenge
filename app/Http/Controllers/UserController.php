@@ -35,17 +35,12 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::OrderBy('created_at', 'desc')->get();
-        return view('user.create', compact('roles'));
-    }
 
-    /**
-     * Muestra el formulario de edición para un usuario existente.
-     */
-    public function detail($id)
-    {
-        $roles = Role::OrderBy('created_at', 'desc')->get();
-        $user = User::findOrFail($id);
-        return view( 'user.detail', compact( 'roles', 'user' ) );
+        if( Crypt::decryptString( session( env( "APP_CODE" ) . 'r013' ) ) == 2 ){
+
+            $roles = Role::Where('id',3)->OrderBy('created_at', 'desc')->get();
+        }
+        return view('user.create', compact('roles'));
     }
 
     /**
@@ -54,17 +49,12 @@ class UserController extends Controller
     public function edit($id)
     {
         $roles = Role::OrderBy('created_at', 'desc')->get();
+        if( Crypt::decryptString( session( env( "APP_CODE" ) . 'r013' ) ) == 2 ){
+
+            $roles = Role::Where('id',3)->OrderBy('created_at', 'desc')->get();
+        }
         $user = User::findOrFail($id);
         return view('user.edit', compact('roles', 'user'));
-    }
-
-    /**
-     * Muestra el formulario de edición para un usuario existente.
-     */
-    public function profile($id)
-    {
-        $user = User::findOrFail($id);
-        return view('user.edit', compact('user'));
     }
 
     /**
@@ -76,7 +66,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'role_id' => 'required|exists:roles,id',
             'email' => 'required|string|unique:users,email',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
             'password' => 'required|string|min:6',
             'repassword' => 'required|string|min:6|same:password',
         ]);
@@ -93,29 +82,6 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->role_id = $request->role_id;
             $user->password = Hash::make( $request->password );
-            
-            $url = Str::slug( $request->email );
-
-            if( env( 'APP_ENV' ) == 'local' ){
-
-                $rutaUser = public_path( 'img/user/' );
-            }
-            else{
-
-                $rutaUser = getcwd() . '/img/user/';
-            }
-
-            // Guardar imagen principal
-            if ($request->hasFile('avatar')) {
-
-                $avatar = $request->file('avatar');
-                $imageExt = '.' . $request->file( 'avatar' )->getClientOriginalExtension();
-
-                $avatarName = $url . $imageExt;
-                $avatar->move( $rutaUser, $avatarName );
-                $user->avatar = 'img/user/' . $avatarName;
-            }
-
             $user->save();
 
             DB::commit();
@@ -141,7 +107,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'role_id' => 'required|exists:roles,id',
             'email' => 'required|string|unique:users,email,' . $user->id,
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
         ]);
 
         if ($validator->fails()) {
@@ -153,30 +118,7 @@ class UserController extends Controller
 
             $user->name = $request->name;
             $user->role_id = $request->role_id;
-            $user->email = $request->email;
-
-            $url = Str::slug( $user->email );
-            
-            if( env( 'APP_ENV' ) == 'local' ){
-
-                $rutaUser = public_path( 'img/user/' );
-            }
-            else{
-
-                $rutaUser = getcwd() . '/img/user/';
-            }
-
-            // Guardar Avatar
-            if ($request->hasFile('avatar')) {
-
-                $avatar = $request->file('avatar');
-                $imageExt = '.' . $request->file( 'avatar' )->getClientOriginalExtension();
-
-                $avatarName = $url . $imageExt;
-                $avatar->move( $rutaUser, $avatarName );
-                $user->avatar = 'img/user/' . $avatarName;
-            }
-            
+            $user->email = $request->email;            
             $user->save();
             
             DB::commit();
