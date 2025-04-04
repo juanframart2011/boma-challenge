@@ -13,20 +13,25 @@ Este proyecto está desarrollado sobre el framework **Laravel**, basado en **PHP
    composer install
 
 2. Crear el archivo .env (si aún no existe):
+	```bash
 	cp .env.example .env
 
 3. Instalar dependencias con Composer:
+	```bash
 	php artisan key:generate
 
 4. Configurar el archivo .env con los datos de conexión a la base de datos.
 
 5. Ejecutar las migraciones (si aplica):
+	```bash
 	php artisan migrate
 
 6. (Opcional) Generar la clave secreta para JWT:
+	```bash
 	php artisan jwt:secret
 
 7. Levantar el servidor de desarrollo:
+	```bash
 	php artisan serve
 
 8. Acceder desde el navegador:
