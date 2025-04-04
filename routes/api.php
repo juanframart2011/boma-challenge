@@ -13,12 +13,16 @@ use App\Http\Controllers\Api\CampaignsController;
 
 Route::post('login', [AuthController::class, 'login']);
 
-#Route::middleware('auth:api')->group(function () {
-    Route::get('me', [AuthController::class, 'me']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
+Route::get('/test', function () {
+    return response()->json(['message' => 'Ruta API activa']);
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
 
 
-    Route::get('dashboard', [CampaignsController::class, 'dashboard']);
-    Route::get('landig/{campaingId}', [CampaignsController::class, 'landig']);
-#});
+    Route::get('/dashboard', [CampaignsController::class, 'dashboard']);
+    Route::get('/landig/{campaingId}', [CampaignsController::class, 'landig']);
+});
