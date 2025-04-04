@@ -15,6 +15,10 @@ class VerifyProfile
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if( empty( $request->session()->get( env( "APP_CODE" ) . '1d' ) ) ){
+
+            return redirect( '/' );
+        }
         return $next($request);
     }
 }
