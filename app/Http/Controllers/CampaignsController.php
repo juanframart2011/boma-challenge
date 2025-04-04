@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -12,49 +13,52 @@ use App\Models\Campaign;
 class CampaignsController extends Controller
 {
     /**
-     * Muestra la lista de Categoría.
+     * Muestra la lista de campañas.
      */
     public function index()
     {
-        #$categories = Campaign::OrderBy('created_at', 'desc')->get();
-        $categories = array();
-        return view('campaign.index', compact('categories'));
+        $campaigns = Campaign::OrderBy('created_at', 'desc')->get();
+        return view('campaign.index', compact('campaigns'));
     }
 
     /**
-     * Muestra el formulario para crear un nuevo categoría.
+     * Muestra el formulario para crear un nuevo campaña.
      */
     public function create()
     {
-        return view('campaign.create');
+        return view( 'campaign.create' );
     }
 
     /**
-     * Muestra el formulario de edición para un categoría existente.
+     * Muestra el formulario de edición para un campaña existente.
      */
     public function detail($id)
     {
-        $Campaign = Campaign::findOrFail($id);
-        return view('campaign.detail', compact('Campaign' ));
+        $campaign = Campaign::findOrFail($id);
+        return view('campaign.detail', compact('campaign' ));
     }
 
     /**
-     * Muestra el formulario de edición para un categoría existente.
+     * Muestra el formulario de edición para un campaña existente.
      */
     public function edit($id)
     {
-        $Campaign = Campaign::findOrFail($id);
-        return view('campaign.edit', compact('Campaign'));
+        $campaign = Campaign::findOrFail($id);
+        return view('campaign.edit', compact('campaign'));
     }
 
     /**
-     * Guardar un nuevo categoría con carga de imágenes.
+     * Guardar un nuevo campaña con carga de imágenes.
      */
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:categories,name',
-            'code' => 'required|string|max:20|unique:categories,code',
+            'name' => 'required|unique:campaigns,name',
+            'description' => 'nullable',
+            'presupuesto' => 'required|numeric|min:0',
+            'active' => 'boolean',
+            'fecha' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
         ]);
 
         if ($validator->fails()) {
@@ -63,17 +67,47 @@ class CampaignsController extends Controller
 
         DB::beginTransaction();
         try {
-            // Guardar categoría
-            $Campaign = new Campaign();
-            $Campaign->name = $request->name;
-            $Campaign->code = $request->code;
-            $Campaign->description = $request->description;
-            $Campaign->url = Str::slug( $request->name );
+            // Guardar campaña
+            $campaign = new campaign();
+            $campaign->name = $request->name;
+            $campaign->fecha = $request->fecha;
+            $campaign->description = $request->description;
+            $campaign->presupuesto = $request->presupuesto;
+            $campaign->active = $request->active;
+            $campaign->created_by = Crypt::decryptString( session( env( "APP_CODE" ) . '1d' ) );
 
-            $Campaign->save();
+            $url = Str::slug( $request->name . date( "Ymd His" ) );
+
+            if( !file_exists( getcwd() . '/img/campaign/' . $url ) ){
+
+                mkdir( getcwd() . '/img/campaign/' . $url, 0777, true );
+            }
+
+            if( env( 'APP_ENV' ) == 'local' ){
+
+                $rutacampaign = public_path( 'img/campaign/' );
+            }
+            else{
+
+                $rutacampaign = getcwd() . '/img/campaign/';
+            }
+
+            // Guardar imagen principal
+            if ($request->hasFile('image')) {
+
+                $image = $request->file('image');
+                $imageExt = '.' . $request->file( 'image' )->getClientOriginalExtension();
+
+                $imageName = $url . $imageExt;
+                $image->move( $rutacampaign, $imageName );
+                $campaign->image = 'img/campaign/' . $imageName;
+            }
+
+            $campaign->url = $url;
+            $campaign->save();
 
             DB::commit();
-            return response()->json(['success' => true, 'message' => 'Categoría guardado correctamente.']);
+            return response()->json(['success' => true, 'message' => 'campaña guardada correctamente.']);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], 500);
@@ -81,19 +115,23 @@ class CampaignsController extends Controller
     }
 
     /**
-     * Actualiza un categoría existente con carga de imágenes.
+     * Actualiza un campaña existente con carga de imágenes.
      */
     public function update(Request $request, $id)
     {
-        $Campaign = Campaign::findOrFail($id);
+        $campaign = Campaign::findOrFail($id);
 
-        if( !$Campaign ){
-            return response()->json(['errors' => ['No existe la categoría']], 422);
+        if( !$campaign ){
+            return response()->json(['errors' => ['No existe la campaña']], 422);
         }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:20|unique:categories,code,' . $Campaign->id,
+            'description' => 'required|string',
+            'presupuesto' => 'required|numeric|min:0',
+            'fecha' => 'required',
+            'active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072',
         ]);
 
         if ($validator->fails()) {
@@ -103,15 +141,33 @@ class CampaignsController extends Controller
         DB::beginTransaction();
         try {
 
-            $Campaign->name = $request->name;
-            $Campaign->code = $request->code;
-            $Campaign->description = $request->description;
-            
-            $Campaign->save();
+            $url = Str::slug( $campaign->category_id . $campaign->name );
 
-            
+            if( !file_exists( getcwd() . '/img/campaign/' . $url ) ){
+
+                mkdir( getcwd() . '/img/campaign/' . $url, 0777, true );
+            }
+
+            $campaign->name = $request->name;
+            $campaign->description = $request->description;
+            $campaign->presupuesto = $request->presupuesto;
+            $campaign->fecha = $request->fecha;
+            $campaign->active = $request->active;
+            $campaign->created_by = Crypt::decryptString( session( env( "APP_CODE" ) . '1d' ) );
+
+            if( env( 'APP_ENV' ) == 'local' ){
+
+                $rutacampaign = public_path( 'img/campaign/' );
+            }
+            else{
+
+                $rutacampaign = getcwd() . '/img/campaign/';
+            }
+
+            $campaign->save();
+
             DB::commit();
-            return response()->json(['success' => true, 'message' => 'categoría actualizado correctamente.']);
+            return response()->json(['success' => true, 'message' => 'campaña actualizada correctamente.']);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], 500);
@@ -119,12 +175,12 @@ class CampaignsController extends Controller
     }
 
     /**
-     * Eliminar un categoría (SoftDelete).
+     * Eliminar un campaña (SoftDelete).
      */
     public function delete(Request $request)
     {
-        $Campaign = Campaign::findOrFail($request->id);
-        $Campaign->delete();
-        return response()->json(['success' => true, 'message' => 'Categoría eliminada correctamente.']);
+        $campaign = Campaign::findOrFail($request->id);
+        $campaign->delete();
+        return response()->json(['success' => true, 'message' => 'campaña eliminada correctamente.']);
     }
 }
