@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get( 'create', [ CampaignsController::class, 'create' ] )->name('create');
         Route::post( 'save', [ CampaignsController::class, 'save' ] )->name('save');
         
+        Route::get( 'detail/{id}', [ CampaignsController::class, 'detail' ] )->name('detail');
         Route::get( 'edit/{id}', [ CampaignsController::class, 'edit' ] )->name('edit');
         Route::put( 'update/{id}', [ CampaignsController::class, 'update' ] )->name('update');
 

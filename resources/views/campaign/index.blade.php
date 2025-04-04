@@ -1,6 +1,6 @@
 @extends( 'layout.main' )
 
-@section( "title", 'Lista de Campañas' )
+@section( "title", 'Lista de campaña' )
 
 @push('styles')
     
@@ -28,7 +28,7 @@
     <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Campaña</a></li>
+                <li class="breadcrumb-item"><a href="#">campaña</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Lista</li>
             </ol>
         </nav>
@@ -42,31 +42,37 @@
                 <table id="campaign-list" class="table dt-table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Código</th>
-                            <th>URL</th>
+                            <th>campaña</th>
+                            <th>Estatus</th>
+                            <th>Presupuesto</th>
+                            <th>Fecha</th>
                             <th>Fecha de Creación</th>                            
                             <th class="no-content text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse( $categories as $campaign )
+                        @forelse( $campaigns as $campaign )
                             <tr>
                                 <td>
                                     <div class="d-flex justify-content-left align-items-center">
-                                        @if( !empty( $campaign->image ) )
-                                            <div class="avatar">
-                                                <img src="{{ asset( $campaign->image ) }}" alt="{{ $campaign->name }}" class="rounded-circle" />
-                                            </div>
-                                        @endif
+                                        <div class="avatar">
+                                            <img src="{{ asset( $campaign->image ) }}" alt="{{ $campaign->name }}" class="rounded-circle" />
+                                        </div>
 
                                         <div class="d-flex flex-column">
                                             <span class="text-truncate fw-bold">{{ $campaign->name }}</span>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $campaign->code }}</td>
-                                <td>{{ $campaign->url }}</td>
+                                <td>
+                                    @if( !$campaign->active )
+                                        <span class="badge badge-danger">No Activo</span>
+                                    @else
+                                        <span class="badge badge-success">Activo</span>
+                                    @endif
+                                </td>
+                                <td>${{ $campaign->presupuesto }}</td>
+                                <td>${{ $campaign->fecha }}</td>
                                 <td>{{ $campaign->created_at }}</td>
                                 <td class="text-center">
                                     <div class="dropdown">
@@ -75,8 +81,11 @@
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="z-index:2;">
+                                            <a class="dropdown-item" href="{{ route( 'campaign.detail', $campaign->id ) }}">Ver</a>
                                             <a class="dropdown-item" href="{{ route( 'campaign.edit', $campaign->id ) }}">Editar</a>
-                                            <a class="dropdown-item btn-delete" data-id="{{ $campaign->id }}" data-name="{{ $campaign->name }}" href="#">Eliminar</a>
+                                            @if( Crypt::decryptString( session( env( "APP_CODE" ) . 'r013' ) ) == 1 )
+                                                <a class="dropdown-item btn-delete" data-id="{{ $campaign->id }}" data-name="{{ $campaign->name }}" href="#">Eliminar</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
@@ -99,7 +108,7 @@
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="{{ asset( 'plugins/src/table/datatable/datatables.js' ) }}"></script>
     <script>
-        productList = $('#campaign-list').DataTable({
+        campaignList = $('#campaign-list').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
         "<'table-responsive'tr>" +
         "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
@@ -125,7 +134,7 @@
                 var url = "{{ route( 'campaign.delete' ) }}";
 
                 Swal.fire({
-                    title: '¿Estas seguro de eliminar la categoria '+name+'?',
+                    title: '¿Estas seguro de eliminar la campaña '+name+'?',
                     text: "¡Al eliminarlo no se podrá recuperar el registro!",
                     icon: 'warning',
                     showCancelButton: true,
