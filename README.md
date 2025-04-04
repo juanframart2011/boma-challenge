@@ -4,7 +4,8 @@
 
 ## **Instrucciones**
 
-Este proyecto está desarrollado sobre el framework **Laravel**, basado en **PHP**. Para ejecutarlo necesitas contar con un servidor local y [Composer](https://getcomposer.org/).
+Este proyecto está desarrollado sobre el framework **Laravel**, basado en **PHP 8.2**.  
+Para ejecutarlo necesitas contar con un servidor local, como [Laragon](https://laragon.org/download/), y tener instalado [Composer](https://getcomposer.org/).
 
 ### Pasos para correr el proyecto:
 
