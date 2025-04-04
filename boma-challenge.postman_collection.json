@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "6ae3334e-e42f-4be7-a091-92b3ae0e3d78",
+		"name": "boma-challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "388641"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eduardo.araujo@istrategy.ai",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://boma-challenge.test/api/login",
+							"protocol": "http",
+							"host": [
+								"boma-challenge",
+								"test"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9tYS1jaGFsbGVuZ2UudGVzdC9hcGkvbG9naW4iLCJpYXQiOjE3NDM3MTk4MzcsImV4cCI6MTc0MzcyMzQzOCwibmJmIjoxNzQzNzE5ODM4LCJqdGkiOiJFc2VmVXRXY3N3UWZtMmt4Iiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.K3Q57ql6kRd3QW2IpaHULO0wSdva2If7mTwGhbi42ok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eduardo.araujo@istrategy.ai",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://boma-challenge.test/api/logout",
+							"protocol": "http",
+							"host": [
+								"boma-challenge",
+								"test"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://boma-challenge.test/api/refresh",
+							"protocol": "http",
+							"host": [
+								"boma-challenge",
+								"test"
+							],
+							"path": [
+								"api",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9tYS1jaGFsbGVuZ2UudGVzdC9hcGkvbG9naW4iLCJpYXQiOjE3NDM3MzgxODEsImV4cCI6MTc0Mzc0MTc4MSwibmJmIjoxNzQzNzM4MTgxLCJqdGkiOiIzY0lsNlJabTN1SWRJcUlVIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.7X0Bheq33aXKYqECBSzXFn451d43xC3TBbCejYXCX0s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eduardo.araujo@istrategy.ai",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://boma-challenge.test/api/me",
+							"protocol": "http",
+							"host": [
+								"boma-challenge",
+								"test"
+							],
+							"path": [
+								"api",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "metricas",
+			"item": [
+				{
+					"name": "dashboard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9tYS1jaGFsbGVuZ2UudGVzdC9hcGkvbG9naW4iLCJpYXQiOjE3NDM3MzgxODEsImV4cCI6MTc0Mzc0MTc4MSwibmJmIjoxNzQzNzM4MTgxLCJqdGkiOiIzY0lsNlJabTN1SWRJcUlVIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.7X0Bheq33aXKYqECBSzXFn451d43xC3TBbCejYXCX0s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eduardo.araujo@istrategy.ai",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://boma-challenge.test/api/dashboard",
+							"protocol": "http",
+							"host": [
+								"boma-challenge",
+								"test"
+							],
+							"path": [
+								"api",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "landig",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYm9tYS1jaGFsbGVuZ2UudGVzdC9hcGkvbG9naW4iLCJpYXQiOjE3NDM3MzY0ODMsImV4cCI6MTc0Mzc0MDA4MywibmJmIjoxNzQzNzM2NDgzLCJqdGkiOiI4bE1zQmRFSlFiT01LMlhnIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PusIIcYuzDRSQwfgl6_X17evP-cu25N7UAUnzI91jE8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eduardo.araujo@istrategy.ai",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://boma-challenge.test/api/landig/2",
+							"protocol": "http",
+							"host": [
+								"boma-challenge",
+								"test"
+							],
+							"path": [
+								"api",
+								"landig",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

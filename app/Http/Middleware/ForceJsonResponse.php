@@ -16,7 +16,6 @@ class ForceJsonResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        Log::info('👉 Entró al middleware ForceJsonResponse');
         $request->headers->set('Accept', 'application/json');
 
         return $next($request);
