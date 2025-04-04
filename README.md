@@ -21,18 +21,27 @@ Este proyecto está desarrollado sobre el framework **Laravel**, basado en **PHP
 	php artisan key:generate
 
 4. Configurar el archivo .env con los datos de conexión a la base de datos.
+	4.1 DB_HOST: tu host
+	4.2 DB_PORT: tu puerto(default es 3306)
+	4.3 DB_DATABASE: tu base de datos
+	4.4 DB_USERNAME: tu usuario de la base de datos
+	4.5 DB_PASSWORD: tu contraseña de la base de datos
 
 5. Ejecutar las migraciones (si aplica):
 	```bash
 	php artisan migrate
 
-6. (Opcional) Generar la clave secreta para JWT:
+6. Ejecutar los seeder (este inserta los roles y usuarios nuevos):
+	```bash
+	php artisan db:seed
+
+7. (Opcional) Generar la clave secreta para JWT:
 	```bash
 	php artisan jwt:secret
 
-7. Levantar el servidor de desarrollo:
+8. Levantar el servidor de desarrollo:
 	```bash
 	php artisan serve
 
-8. Acceder desde el navegador:
+9. Acceder desde el navegador:
 	http://localhost:8000
