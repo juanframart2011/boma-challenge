@@ -46,7 +46,7 @@ Este proyecto está desarrollado sobre el framework **Laravel**, basado en **PHP
 9. Acceder desde el navegador:
 	http://localhost:8000
 
-10. Entrando al sistema ya puedes agregar con los usuarios proporcionados.
+10. Entrando al sistema ya puedes agregar con los usuarios proporcionados en la ruta "database/seeders/UserSeeder.php", están los usuarios creados y su password.
 
 11. En la raiz del proyecto tienes un archivo llamado "boma-challenge.postman_collection.json" importarlo en postman y para funcionar los servicios cambiamos la url del proyecto al de "http://localhost:8000"
 
